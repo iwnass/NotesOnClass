@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
@@ -29,7 +29,8 @@ header h1 {
   flex-wrap: wrap;
 }
 
-header button, header input {
+header button,
+header input {
   margin: 5px;
   padding: 12px;
   font-size: 16px;
@@ -38,24 +39,26 @@ header button, header input {
 }
 
 header button {
-  background-color: #007bff;
+  background-color: #1d8fc4;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 header button:hover {
-  background-color: #0056b3;
+  background-color: #0061c9;
 }
 
-header input[type="text"], header input[type="password"] {
+header input[type="text"],
+header input[type="password"] {
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: border-color 0.3s ease;
 }
 
-header input[type="text"]:focus, header input[type="password"]:focus {
+header input[type="text"]:focus,
+header input[type="password"]:focus {
   border-color: #007bff;
   outline: none;
 }
@@ -83,7 +86,7 @@ header input[type="text"]:focus, header input[type="password"]:focus {
 /* Search Button Styles */
 .search-container {
   display: flex;
-  align-items: center;
+  align-items: inherit;
   margin-top: 15px;
   flex-wrap: nowrap; /* Ensure the input and button are in one line */
 }
@@ -91,10 +94,11 @@ header input[type="text"]:focus, header input[type="password"]:focus {
 .search-container input {
   width: calc(100% - 85px); /* Adjust to fit button */
   max-width: 300px; /* Ensure it does not grow too large */
-  margin-right: 5px; /* Adds a 5px gap between the input and button */
+  margin-right: -25px; /* Adds a 5px gap between the input and button */
 }
 
 .search-container button {
+  display: contents;
   max-width: 80px; /* Limit the button width on larger screens */
   width: auto;
 }
@@ -164,7 +168,10 @@ form label {
   font-weight: bold;
 }
 
-form input[type="text"], form input[type="password"], form select, form input[type="file"] {
+form input[type="text"],
+form input[type="password"],
+form select,
+form input[type="file"] {
   width: calc(100% - 22px);
   padding: 12px;
   border: 1px solid #ccc;
@@ -262,6 +269,7 @@ form button:hover {
   }
 
   .search-container button {
+    display: inline;
     width: 100%; /* Full width button on mobile */
     max-width: none; /* Remove width limit for mobile */
     margin-top: 5px; /* Add some space between input and button */
@@ -281,11 +289,13 @@ form button:hover {
     font-size: 20px;
   }
 
-  header button, header input {
+  header button,
+  header input {
     font-size: 14px;
   }
 
-  form input, form button {
+  form input,
+  form button {
     font-size: 14px;
   }
 }
