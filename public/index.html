@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Εδώ θα βρείς σημειώσεις για (σχεδόν) όλα τα μαθήματα</h1>
+        <div class="header-controls">
+            <button id="adminPanelButton">Admin Panel</button>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Search notes...">
+            <button id="searchButton">Search</button>
+        </div>
+        <div id="adminPasswordContainer">
+            <input type="password" id="adminPassword" placeholder="Enter admin password">
+            <button id="accessAdminPanel">Access Admin Panel</button>
+        </div>
+    </header>
+    <main>
+        <section id="categories">
+            <div class="category" id="category1">
+                <h2>Προγραμματισμός</h2>
+                <div class="filesList" id="filesCategory1">
+                    <!-- Files for Category 1 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category2">
+                <h2>Δίκτυα</h2>
+                <div class="filesList" id="filesCategory2">
+                    <!-- Files for Category 2 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category3">
+                <h2>Άλγεβρα</h2>
+                <div class="filesList" id="filesCategory3">
+                    <!-- Files for Category 3 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category4">
+                <h2>Σχεδ.Εφαρμογών</h2>
+                <div class="filesList" id="filesCategory4">
+                    <!-- Files for Category 4 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category5">
+                <h2>Φυσική</h2>
+                <div class="filesList" id="filesCategory5">
+                    <!-- Files for Category 5 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category6">
+                <h2>Νέα Ελληνικά & Λογοτεχνία</h2>
+                <div class="filesList" id="filesCategory6">
+                    <!-- Files for Category 6 will be listed here -->
+                </div>
+            </div>
+            <div class="category" id="category7">
+                <h2>Βάσεις Δεδομένων</h2>
+                <div class="filesList" id="filesCategory7">
+                    <!-- Files for Category 7 will be listed here -->
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

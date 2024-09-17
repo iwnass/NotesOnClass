@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <button id="goBackButton">Go Back to Main Page</button>
+    </header>
+    <main>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required><br>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description"><br>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Προγραμματισμός">Προγραμματισμός</option>
+                <option value="Δίκτυα">Δίκτυα</option>
+                <option value="Άλγεβρα">Άλγεβρα</option>
+                <option value="ΣχεδΕφαρμογών">Σχεδ.Εφαρμογών</option>
+                <option value="Φυσική">Φυσική</option>
+                <option value="Γλώσσα">Νέα Ελληνικά & Λογοτεχνία</option>
+                <option value="ΒάσειςΔεδομένων">Βάσεις Δεδομένων</option> 
+            </select>
+            <br>
+
+            <label for="file">File:</label>
+            <input type="file" id="file" name="file" accept=".pdf" required><br>
+
+            <button type="submit">Upload Note</button>
+        </form>
+
+        <section id="filesList">
+            <!-- Uploaded files will be listed here with delete options -->
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
