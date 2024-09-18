@@ -27,7 +27,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
     author,
     description,
     category,
-    url: `/uploads/${file.filename}`,
+    url: `/uploads/${file.originalname}`,
   };
 
   fs.readFile("files.json", (err, data) => {
