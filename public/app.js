@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Show admin panel password input when the button is clicked
   adminPanelButton.addEventListener("click", () => {
-    adminPasswordContainer.style.display = "block";
+  adminPasswordContainer.style.display = "block";
+  adminPasswordInput.focus();
   });
 
   // Access admin panel when password is submitted
@@ -27,6 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
   adminPasswordInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       accessAdminPanelButton.click();
+    }
+
+    if (event.key === "Escape") {
+      adminPasswordContainer.style.display = 'none';
     }
   });
 
