@@ -20,22 +20,24 @@
     />
   </head>
   <body>
-    <header>
-      <div class="header-controls">
-        <button id="adminPanelButton">
-          Admin <i class="fa-solid fa-user" style="color: #303030"></i>
-        </button>
-      </div>
-      <div class="search-container">
+    <nav id="makaronia" class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="header-controls">
+          <button id="adminPanelButton">
+            Admin <i class="fa-solid fa-user" style="color: #303030"></i>
+          </button>
+          <h1 class="position-absolute top-50 start-50 translate-middle"><i>Notes4All</i></h1>
+        </div>
+          <div class="search-container">
         <input type="text" id="searchBar" placeholder="Search notes..." />
         <button id="searchButton">
           <i
             class="fa-solid fa-magnifying-glass p-2"
-            style="color: #4a4a4a"
           ></i>
         </button>
       </div>
-      <h1>Εδώ θα βρείς σημειώσεις για τα μαθήματα</h1>
+      </div>
+    </nav>
       <div id="adminPasswordContainer">
         <input
           type="password"
@@ -44,7 +46,6 @@
         />
         <button id="accessAdminPanel">Access Admin Panel</button>
       </div>
-    </header>
     <main>
       <section id="categories">
         <div class="category" id="category1">
