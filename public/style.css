@@ -157,9 +157,19 @@ main {
   font-size: 20px;
 }
 
+/* Center button with text by mavros */
+
+.content-allign{
+  /* MHN VALEIS DISPLAY DLEX EDW SE GAMHSA */
+  justify-content: center;
+  align-items: center;
+}
+
+
 /* Files List Styles */
-.filesList {
+.filesList p {
   margin-top: 10px;
+  font-size: 1.2em;
 }
 
 .filesList div {
@@ -295,6 +305,7 @@ form button:hover {
   .header-controls {
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
 
   .search-container {
@@ -302,13 +313,13 @@ form button:hover {
   }
 
   .search-container input {
-    width: 100%; /* Full width input on mobile */
+    width: 85%; /* Full width input on mobile */
     margin-right: 0; /* Remove margin on mobile */
   }
 
   .search-container button {
     display: inline;
-    width: 100%; /* Full width button on mobile */
+    width: 85%; /* Full width button on mobile */
     max-width: none; /* Remove width limit for mobile */
     margin-top: 5px; /* Add some space between input and button */
   }
