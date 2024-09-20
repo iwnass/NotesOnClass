@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const filesList = document.getElementById("filesList");
   const goBackButton = document.getElementById("goBackButton");
 
+  // Toast elements
+  const uploadToast = new bootstrap.Toast(document.getElementById('uploadToast'));
+  const deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
+
   // Handle file upload
   uploadForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -16,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert("File uploaded successfully!");
+          uploadToast.show(); // Show upload success toast
           loadFiles();
           uploadForm.reset(); // Reset form fields after upload
         } else {
-          alert("Failed to upload file.");
+          alert("Failed to upload file."); // Optionally handle errors
         }
       })
       .catch((error) => {
@@ -62,16 +66,24 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert("File deleted successfully!");
+          deleteToast.show(); // Show delete success toast
           loadFiles();
         } else {
-          alert("Failed to delete file.");
+          alert("Failed to delete file."); // Optionally handle errors
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }
+
+  setTimeout(() => {
+    uploadToast.hide();
+  }, 1500); // For upload toast
+  
+  setTimeout(() => {
+    deleteToast.hide();
+  }, 1500); // For delete toast
 
   // Go back to main page
   goBackButton.addEventListener("click", () => {

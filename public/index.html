@@ -20,32 +20,45 @@
     />
   </head>
   <body>
-    <nav id="makaronia" class="navbar navbar-dark bg-dark ">
+    <nav id="makaronia" class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <div class="header-controls">
           <button id="adminPanelButton">
             Admin <i class="fa-solid fa-user" style="color: #303030"></i>
           </button>
-          <h1 class="position-absolute top-50 start-50 translate-middle"><i>Notes4All</i></h1>
+          <h1 class="position-absolute top-50 start-50 translate-middle">
+            <i>Notes4All</i>
+          </h1>
         </div>
-          <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search notes..." />
-        <button id="searchButton">
-          <i
-            class="fa-solid fa-magnifying-glass p-2"
-          ></i>
-        </button>
-      </div>
+        <div class="search-container">
+          <input type="text" id="searchBar" placeholder="Search notes..." />
+          <button id="searchButton">
+            <i class="fa-solid fa-magnifying-glass p-2"></i>
+          </button>
+        </div>
       </div>
     </nav>
-      <div id="adminPasswordContainer">
-        <input
-          type="password"
-          id="adminPassword"
-          placeholder="Enter admin password"
-        />
-        <button id="accessAdminPanel">Access Admin Panel</button>
+
+    <div id="adminPasswordContainer">
+      <input
+        type="password"
+        id="adminPassword"
+        placeholder="Enter admin password"
+      />
+      <button id="accessAdminPanel">Access Admin Panel</button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="passwordToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Incorrect password!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
       </div>
+    </div>
     <main>
       <section id="categories">
         <div class="category" id="category1">
