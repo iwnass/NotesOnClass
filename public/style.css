@@ -164,8 +164,9 @@ main {
 
 .filesList div {
   background-color: #fff;
-  border: 2px solid red; /* Red border */
-  border-radius: 50px; /* Rounded corners */
+  border: 3px solid rgba(40, 139, 10, 0.452);
+  border-radius: 10px;
+  padding: 20px;
   padding: 15px;
   margin-bottom: 10px;
   display: flex;
@@ -173,6 +174,10 @@ main {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+
+@keyframes animation {
+  
 }
 
 .filesList div::before {
@@ -318,9 +323,17 @@ form button:hover {
   .filesList div {
     padding: 12px;
   }
+
+  #makaronia h1{
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
+  #makaronia h1{
+    display: none;
+  }
+
   header h1 {
     font-size: 20px;
   }
