@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const fileElement = document.createElement("div");
       fileElement.innerHTML = `
                 <p>${file.title}</p>
-                <a href="${file.url}" target="_blank">View</a>
+                <button type="button" class="btn btn-success"><a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a></button>
             `;
       const categoryElement = document.getElementById(
         categories[file.category]
