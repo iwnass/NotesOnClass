@@ -1,35 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const adminPanelButton = document.getElementById("adminPanelButton");
-  const adminPasswordContainer = document.getElementById(
-    "adminPasswordContainer"
-  );
+  const adminPasswordContainer = document.getElementById("adminPasswordContainer");
   const accessAdminPanelButton = document.getElementById("accessAdminPanel");
   const adminPasswordInput = document.getElementById("adminPassword");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
+  
+  // Toast element
+  const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
   // Show admin panel password input when the button is clicked
   adminPanelButton.addEventListener("click", () => {
-  adminPasswordContainer.style.display = "block";
-  adminPasswordInput.focus();
+    adminPasswordContainer.style.display = "block";
+    adminPasswordInput.focus();
   });
 
-  // Access admin panel when password is submitted
-  accessAdminPanelButton.addEventListener("click", () => {
-    const password = adminPasswordInput.value;
-    if (password === "1234") {
-      window.location.href = "admin.html";
-    } else {
-      alert("Incorrect password!");
-    }
-  });
+// Access admin panel when password is submitted
+accessAdminPanelButton.addEventListener("click", () => {
+  const password = adminPasswordInput.value;
+  if (password === "1234") {
+    window.location.href = "admin.html";
+  } else {
+    // Show the toast for incorrect password
+    passwordToast.show();
+    
+    // Hide the toast after 1.5 seconds
+    setTimeout(() => {
+      passwordToast.hide();
+    }, 1500);
+  }
+});
 
   // Trigger admin panel access on Enter key press
   adminPasswordInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       accessAdminPanelButton.click();
     }
-
     if (event.key === "Escape") {
       adminPasswordContainer.style.display = 'none';
     }
@@ -95,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const fileElement = document.createElement("div");
       fileElement.innerHTML = `
                 <p>${file.title}</p>
-                <a href="${file.url}" target="_blank">View</a>
+                <button type="button" class="btn btn-success"><a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a></button>
             `;
       const categoryElement = document.getElementById(
         categories[file.category]
@@ -108,5 +114,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadCategories();
 });
-
-

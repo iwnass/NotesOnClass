@@ -164,8 +164,8 @@ main {
 
 .filesList div {
   background-color: #fff;
-  border: 2px solid red; /* Red border */
-  border-radius: 50px; /* Rounded corners */
+  border: 2px solid #343a40; /* Red border */
+  border-radius: 10px; /* Rounded corners */
   padding: 15px;
   margin-bottom: 10px;
   display: flex;
@@ -231,7 +231,7 @@ form button:hover {
 
 #filesList div {
   background-color: #fff !important;
-  border: 2px solid red !important; /* Red border */
+  border: 2px solid #343a40 !important; /* Red border */
   border-radius: 50px !important; /* Rounded corners */
   padding: 15px !important;
   margin-bottom: 10px !important;
@@ -281,8 +281,6 @@ form button:hover {
 #filesList button:hover {
   background-color: #c82333 !important;
 }
-
-
 /* Responsive Styles */
 @media (max-width: 768px) {
   header {
