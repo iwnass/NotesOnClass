@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminPasswordInput = document.getElementById("adminPassword");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
-  
+  const showPasswordButton = document.getElementById("showPassword");
 
-  
   // Toast element
   const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
@@ -17,22 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
     adminPasswordInput.focus();
   });
 
-
-// Access admin panel when password is submitted
-accessAdminPanelButton.addEventListener("click", () => {
-  const password = adminPasswordInput.value;
-  if (password === "1234") {
-    window.location.href = "admin.html";
-  } else {
-    // Show the toast for incorrect password
-    passwordToast.show();
-    
-    // Hide the toast after 1.5 seconds
-    setTimeout(() => {
-      passwordToast.hide();
-    }, 1500);
-  }
-});
+  // Access admin panel when password is submitted
+  accessAdminPanelButton.addEventListener("click", () => {
+    const password = adminPasswordInput.value;
+    if (password === "1234") {
+      window.location.href = "admin.html";
+    } else {
+      // Show the toast for incorrect password
+      passwordToast.show();
+      
+      // Hide the toast after 1.5 seconds
+      setTimeout(() => {
+        passwordToast.hide();
+      }, 1500);
+    }
+  });
 
   // Trigger admin panel access on Enter key press
   adminPasswordInput.addEventListener("keydown", (event) => {
@@ -42,9 +40,17 @@ accessAdminPanelButton.addEventListener("click", () => {
     if (event.key === "Escape") {
       adminPasswordContainer.style.display = 'none';
     }
-   if (showPassword.addEventListener) {
-    adminPassword.type = "text";
-   }
+  });
+
+  // Toggle password visibility by mauroukos
+  showPasswordButton.addEventListener("click", () => {
+    if (adminPasswordInput.type === "password") {
+      adminPasswordInput.type = "text";
+      showPasswordButton.textContent = "Hide Password";
+    } else {
+      adminPasswordInput.type = "password";
+      showPasswordButton.textContent = "Show Password";
+    }
   });
 
   // Trigger search on Search button click
@@ -58,13 +64,6 @@ accessAdminPanelButton.addEventListener("click", () => {
       searchButton.click();
     }
   });
-  
-  // addEventListener("keydown", (event) => {
-  //   if (event.key === "Escape") {
-  //     window.location.href = "index.html"
-  //   }
-  // });
-
 
   // Function to perform search
   function performSearch(query) {
@@ -124,6 +123,5 @@ accessAdminPanelButton.addEventListener("click", () => {
       }
     });
   }
-
   loadCategories();
 });
