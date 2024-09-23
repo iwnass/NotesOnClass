@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
   
+
+  
   // Toast element
   const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
@@ -14,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     adminPasswordContainer.style.display = "block";
     adminPasswordInput.focus();
   });
+
 
 // Access admin panel when password is submitted
 accessAdminPanelButton.addEventListener("click", () => {
@@ -39,6 +42,9 @@ accessAdminPanelButton.addEventListener("click", () => {
     if (event.key === "Escape") {
       adminPasswordContainer.style.display = 'none';
     }
+   if (showPassword.addEventListener) {
+    adminPassword.type = "text";
+   }
   });
 
   // Trigger search on Search button click
@@ -52,6 +58,13 @@ accessAdminPanelButton.addEventListener("click", () => {
       searchButton.click();
     }
   });
+  
+  // addEventListener("keydown", (event) => {
+  //   if (event.key === "Escape") {
+  //     window.location.href = "index.html"
+  //   }
+  // });
+
 
   // Function to perform search
   function performSearch(query) {
