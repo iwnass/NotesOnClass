@@ -23,32 +23,22 @@
     <nav id="makaronia" class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <div class="header-controls">
-          <!-- Open Admin Password Modal -->
-          <button id="adminPanelButton">
+          <!-- Button to Open Admin Login Modal -->
+          <button id="adminPanelButton" data-bs-toggle="modal" data-bs-target="#adminLoginModal" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer;">
             Admin <i class="fa-solid fa-user" style="color: #303030"></i>
           </button>
-          <!-- Button to Open Modal -->
+    
+          <!-- Button to Open Schedule PDF Modal -->
           <button id="scheduleButton" data-bs-toggle="modal" data-bs-target="#pdfModal" style="background-color: #1bd167; color: #fff; border: none; padding: 10px 20px; cursor: pointer;">
             Schedule <i class="fa-solid fa-table fa-lg" style="color: #303030"></i>
           </button>
-        <!-- Modal to display PDF -->
-        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-secondary" id="pdfModalLabel">Πρόγραμμα</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px;"></button>
-              </div>
-              <div class="modal-body">
-                <iframe src="https://1epal-ag-parask.att.sch.gr/wp-content/uploads/2024/09/%CE%A9%CE%A1%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%9F-%CE%93%CE%99%CE%91-%CE%9A%CE%91%CE%98%CE%95-%CE%A4%CE%9C%CE%97%CE%9C%CE%91-23-9-24.pdf" style="width: 100%; height: 600px;" frameborder="0"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
+    
+          <!-- Navbar Title -->
           <h1 class="position-absolute top-50 start-50 translate-middle">
             <i>Notes4All</i>
           </h1>
         </div>
+    
         <!-- Search Bar -->
         <div class="search-container">
           <input type="text" id="searchBar" placeholder="Search notes..." />
@@ -58,27 +48,68 @@
         </div>
       </div>
     </nav>
-
-    <div id="adminPasswordContainer">
-      <input
-        type="password"
-        id="adminPassword"
-        placeholder="Enter admin password"
-      />
-      <button id="accessAdminPanel">Access Admin Panel</button>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="passwordToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body">
-            Incorrect password!
+    
+<!-- Admin Login Modal with Username and Password Fields -->
+<div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <!-- Center modal vertically -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="adminLoginForm">
+          <div class="mb-3">
+            <label for="adminUsernameInput" class="form-label">Username</label>
+            <input type="text" id="adminUsernameInput" class="form-control" placeholder="Enter username" required />
           </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          <div class="mb-3">
+            <label for="adminPasswordInput" class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" id="adminPasswordInput" class="form-control" placeholder="Enter password" required />
+              <span class="input-group-text" id="togglePasswordVisibility" style="cursor: pointer;">
+                <i id="passwordIcon" class="fa-solid fa-eye"></i> <!-- Eye icon for password visibility toggle -->
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" id="accessAdminPanelButton" class="btn btn-primary">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast for incorrect login -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="passwordToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Incorrect username or password!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+    
+    <!-- Modal to display PDF -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-secondary" id="pdfModalLabel">Πρόγραμμα</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; top: 10px; right: 10px;"></button>
+          </div>
+          <div class="modal-body">
+            <iframe src="https://1epal-ag-parask.att.sch.gr/wp-content/uploads/2024/09/%CE%A9%CE%A1%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%9F-%CE%93%CE%99%CE%91-%CE%9A%CE%91%CE%98%CE%95-%CE%A4%CE%9C%CE%97%CE%9C%CE%91-23-9-24.pdf" style="width: 100%; height: 600px;" frameborder="0"></iframe>
+          </div>
         </div>
       </div>
     </div>
+    
     <main>
       <section id="categories">
         <div class="category" id="category1">

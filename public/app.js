@@ -5,42 +5,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminPasswordInput = document.getElementById("adminPassword");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
-  
+  const showPasswordButton = document.getElementById("showPassword");
+
   // Toast element
   const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
-  // Show admin panel password input when the button is clicked
-  adminPanelButton.addEventListener("click", () => {
-    adminPasswordContainer.style.display = "block";
-    adminPasswordInput.focus();
+  // Handle admin login when "Login" button is clicked
+  document.getElementById("accessAdminPanelButton").addEventListener("click", function() {
+    const username = document.getElementById('adminUsernameInput').value;
+    const password = document.getElementById('adminPasswordInput').value;
+
+    // Simple hardcoded credentials check
+    if (username === "admin" && password === "1234") {
+      // Redirect to admin.html upon correct login
+      window.location.href = "admin.html";
+    } else {
+      // Show the toast for incorrect login
+      passwordToast.show();
+      
+      // Hide the toast after 1.5 seconds
+      setTimeout(() => {
+        passwordToast.hide();
+      }, 1500);
+    }
   });
 
-// Access admin panel when password is submitted
-accessAdminPanelButton.addEventListener("click", () => {
-  const password = adminPasswordInput.value;
-  if (password === "1234") {
-    window.location.href = "admin.html";
-  } else {
-    // Show the toast for incorrect password
-    passwordToast.show();
+  // Toggle password visibility
+  document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
+    const adminPasswordInput = document.getElementById('adminPasswordInput');
+    const passwordIcon = document.getElementById("passwordIcon");
     
-    // Hide the toast after 1.5 seconds
-    setTimeout(() => {
-      passwordToast.hide();
-    }, 1500);
-  }
-});
-
-  // Trigger admin panel access on Enter key press
-  adminPasswordInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      accessAdminPanelButton.click();
-    }
-    if (event.key === "Escape") {
-      adminPasswordContainer.style.display = 'none';
+    if (adminPasswordInput.type === "password") {
+      adminPasswordInput.type = "text";
+      passwordIcon.classList.remove("fa-eye");
+      passwordIcon.classList.add("fa-eye-slash");
+    } else {
+      adminPasswordInput.type = "password";
+      passwordIcon.classList.remove("fa-eye-slash");
+      passwordIcon.classList.add("fa-eye");
     }
   });
-
   // Trigger search on Search button click
   searchButton.addEventListener("click", () => {
     performSearch(searchBar.value);
@@ -111,6 +115,5 @@ accessAdminPanelButton.addEventListener("click", () => {
       }
     });
   }
-
   loadCategories();
 });
