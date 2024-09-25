@@ -115,5 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
   loadCategories();
 });

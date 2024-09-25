@@ -6,5 +6,13 @@
     "description": "test file description",
     "category": "Δίκτυα",
     "url": "/uploads/dictionary.pdf"
+  },
+  {
+    "id": 1727253422014,
+    "title": "Test",
+    "author": "Skelly",
+    "description": "TestFdsfsdf",
+    "category": "ΣχεδΕφαρμογών",
+    "url": "/uploads/dictionary.pdf"
   }
 ]

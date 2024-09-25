@@ -118,6 +118,15 @@ body {
   border-color: #007bff !important;
 }
 
+.filesList {
+  display: none; /* Initially hide all file lists */
+}
+.category {
+  margin-bottom: 1rem;
+}
+.search-container {
+  margin: 1rem 0;
+}
 
 /* Search Button Styles */
 .search-container {
