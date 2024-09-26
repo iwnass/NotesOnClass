@@ -2,12 +2,12 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
+require('dotenv').config(); // Import dotenv to load environment variables
 
 const app = express();
 const PORT = 3000;
 
-//const upload = multer({ dest: "uploads/" });
-
+// Multer configuration for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -19,10 +19,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
-app.use("/uploads", express.static("uploads")); // MPRAVO MALAKES WRAIOI PROGRAMATISTES EISTE KOLOPOUSTES
+app.use("/uploads", express.static("uploads")); 
+
+// Endpoint to fetch the admin password from the server
+app.get('/admin-password', (req, res) => {
+  res.json({ password: process.env.serverPassword });
+});
+
+// Endpoint to upload a file
 app.post("/upload", upload.single("file"), (req, res) => {
   const { title, author, description, category } = req.body;
   const file = req.file;
@@ -59,6 +65,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
   });
 });
 
+// Endpoint to fetch all files
 try {
   app.get("/files", (req, res) => {
     fs.readFile("files.json", (err, data) => {
@@ -70,6 +77,7 @@ try {
   console.log(error);
 }
 
+// Endpoint to delete a file by id
 app.delete("/delete/:id", (req, res) => {
   const fileId = parseInt(req.params.id);
 
@@ -86,6 +94,7 @@ app.delete("/delete/:id", (req, res) => {
   });
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

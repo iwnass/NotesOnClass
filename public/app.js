@@ -1,40 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
   const adminPanelButton = document.getElementById("adminPanelButton");
-  const adminPasswordContainer = document.getElementById("adminPasswordContainer");
-  const accessAdminPanelButton = document.getElementById("accessAdminPanel");
-  const adminPasswordInput = document.getElementById("adminPassword");
+  const accessAdminPanelButton = document.getElementById("accessAdminPanelButton");
+  const adminPasswordInput = document.getElementById("adminPasswordInput");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
-  const showPasswordButton = document.getElementById("showPassword");
 
   // Toast element
   const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
+  // Fetch the admin password from the server and wait for it to load
+  let serverPassword = null;
+
+  // Create a function to wait for the password to be fetched
+  const fetchAdminPassword = () => {
+    return fetch('/admin-password')
+      .then((response) => response.json())
+      .then((data) => {
+        serverPassword = data.password;
+      });
+  };
+
+  // Focus the admin password input when the "Admin Panel" button is clicked
+  adminPanelButton.addEventListener("click", () => {
+    adminPasswordInput.focus();
+  });
+
   // Handle admin login when "Login" button is clicked
-  document.getElementById("accessAdminPanelButton").addEventListener("click", function() {
+  accessAdminPanelButton.addEventListener("click", function() {
     const username = document.getElementById('adminUsernameInput').value;
     const password = document.getElementById('adminPasswordInput').value;
 
-    // Simple hardcoded credentials check
-    if (username === "admin" && password === "1234") {
-      // Redirect to admin.html upon correct login
-      window.location.href = "admin.html";
-    } else {
-      // Show the toast for incorrect login
-      passwordToast.show();
-      
-      // Hide the toast after 1.5 seconds
-      setTimeout(() => {
-        passwordToast.hide();
-      }, 1500);
-    }
+    // Ensure the password is fetched before performing the login check
+    fetchAdminPassword().then(() => {
+      if (serverPassword === null) {
+        console.error('Failed to load admin password.');
+        return;
+      }
+
+      // Check the password fetched from the server
+      if (username === "admin" && password === serverPassword) {
+        // Redirect to admin.html upon correct login
+        window.location.href = "admin.html";
+      } else {
+        // Show the toast for incorrect login
+        passwordToast.show();
+
+        // Hide the toast after 1.5 seconds
+        setTimeout(() => {
+          passwordToast.hide();
+        }, 1500);
+      }
+    });
   });
 
   // Toggle password visibility
   document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
     const adminPasswordInput = document.getElementById('adminPasswordInput');
     const passwordIcon = document.getElementById("passwordIcon");
-    
+
     if (adminPasswordInput.type === "password") {
       adminPasswordInput.type = "text";
       passwordIcon.classList.remove("fa-eye");
@@ -45,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       passwordIcon.classList.add("fa-eye");
     }
   });
+
   // Trigger search on Search button click
   searchButton.addEventListener("click", () => {
     performSearch(searchBar.value);
@@ -107,9 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>${file.title}</p>
                 <button type="button" class="btn btn-success"><a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a></button>
             `;
-      const categoryElement = document.getElementById(
-        categories[file.category]
-      );
+      const categoryElement = document.getElementById(categories[file.category]);
       if (categoryElement) {
         categoryElement.appendChild(fileElement);
       }
