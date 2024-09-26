@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const adminPanelButton = document.getElementById("adminPanelButton");
   const accessAdminPanelButton = document.getElementById("accessAdminPanelButton");
   const adminPasswordInput = document.getElementById("adminPasswordInput");
+  const adminUsernameInput = document.getElementById("adminUsernameInput");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
 
@@ -11,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch the admin password from the server and wait for it to load
   let serverPassword = null;
 
-  // Create a function to wait for the password to be fetched
   const fetchAdminPassword = () => {
     return fetch('/admin-password')
       .then((response) => response.json())
@@ -20,32 +20,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // Focus the admin password input when the "Admin Panel" button is clicked
-  adminPanelButton.addEventListener("click", () => {
-    adminPasswordInput.focus();
+  // Focus the username input when the modal is shown
+  const adminLoginModal = document.getElementById('adminLoginModal');
+  adminLoginModal.addEventListener('shown.bs.modal', () => {
+    adminUsernameInput.focus();
   });
 
   // Handle admin login when "Login" button is clicked
   accessAdminPanelButton.addEventListener("click", function() {
-    const username = document.getElementById('adminUsernameInput').value;
-    const password = document.getElementById('adminPasswordInput').value;
+    const username = adminUsernameInput.value;
+    const password = adminPasswordInput.value;
 
-    // Ensure the password is fetched before performing the login check
     fetchAdminPassword().then(() => {
       if (serverPassword === null) {
         console.error('Failed to load admin password.');
         return;
       }
 
-      // Check the password fetched from the server
       if (username === "admin" && password === serverPassword) {
-        // Redirect to admin.html upon correct login
         window.location.href = "admin.html";
       } else {
-        // Show the toast for incorrect login
         passwordToast.show();
-
-        // Hide the toast after 1.5 seconds
         setTimeout(() => {
           passwordToast.hide();
         }, 1500);
@@ -53,11 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Toggle password visibility
-  document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
-    const adminPasswordInput = document.getElementById('adminPasswordInput');
-    const passwordIcon = document.getElementById("passwordIcon");
+  // Trigger login on Enter key press in the username input
+  adminUsernameInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      accessAdminPanelButton.click();
+    }
+  });
 
+  // Remaining code...
+
+  // Function to toggle password visibility
+  document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
     if (adminPasswordInput.type === "password") {
       adminPasswordInput.type = "text";
       passwordIcon.classList.remove("fa-eye");
@@ -119,12 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ΒάσειςΔεδομένων: "filesCategory7", // New Category
     };
 
-    // Clear all categories
     Object.values(categories).forEach((id) => {
       document.getElementById(id).innerHTML = "";
     });
 
-    // Populate categories
     files.forEach((file) => {
       const fileElement = document.createElement("div");
       fileElement.innerHTML = `
