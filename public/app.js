@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Toast element
   const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
 
-  // Fetch the admin password from the server and wait for it to load
+  // Fetch the admin password from the server
   let serverPassword = null;
 
   const fetchAdminPassword = () => {
@@ -48,16 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Trigger login on Enter key press in the username input
-  adminUsernameInput.addEventListener("keydown", (event) => {
+  // Trigger login on Enter key press for both username and password inputs
+  const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       accessAdminPanelButton.click();
     }
-  });
+  };
 
-  // Remaining code...
+  adminUsernameInput.addEventListener("keydown", handleKeyDown);
+  adminPasswordInput.addEventListener("keydown", handleKeyDown);
 
-  // Function to toggle password visibility
+  // Toggle password visibility
   document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
     if (adminPasswordInput.type === "password") {
       adminPasswordInput.type = "text";
