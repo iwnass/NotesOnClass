@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadToast = new bootstrap.Toast(document.getElementById('uploadToast'));
   const deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
 
+  // Variable to store the ID of the file to delete
+  let fileIdToDelete;
+
   // Handle file upload
   uploadForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -51,12 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // Attach event listeners to delete buttons
         document.querySelectorAll(".deleteButton").forEach((button) => {
           button.addEventListener("click", (event) => {
-            const fileId = event.target.getAttribute("data-id");
-            deleteFile(fileId);
+            fileIdToDelete = event.target.getAttribute("data-id");
+            const deleteConfirmationModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+            deleteConfirmationModal.show();
           });
         });
       });
   }
+
+  // Confirm delete file
+  document.getElementById('confirmDeleteButton').addEventListener("click", () => {
+    deleteFile(fileIdToDelete);
+    const deleteConfirmationModal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmationModal'));
+    deleteConfirmationModal.hide();
+  });
 
   // Delete file
   function deleteFile(fileId) {
