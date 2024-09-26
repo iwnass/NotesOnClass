@@ -365,3 +365,57 @@ form button:hover {
     font-size: 14px;
   }
 }
+
+
+#admin-header {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+#admin-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+#admin-header #goBackButton {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Form Styles */
+#uploadForm {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#uploadForm h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+#uploadForm .form-label {
+  font-weight: bold;
+}
+
+#uploadForm .form-control {
+  margin-bottom: 15px;
+}
+
+#uploadForm button {
+  display: block;
+  width: 100%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  #uploadForm, #filesList {
+      margin: 0 10px;
+  }
+}
+
