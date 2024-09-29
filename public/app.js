@@ -1,19 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   const adminPanelButton = document.getElementById("adminPanelButton");
-  const accessAdminPanelButton = document.getElementById("accessAdminPanelButton");
+  const accessAdminPanelButton = document.getElementById(
+    "accessAdminPanelButton"
+  );
   const adminPasswordInput = document.getElementById("adminPasswordInput");
   const adminUsernameInput = document.getElementById("adminUsernameInput");
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
 
   // Toast element
-  const passwordToast = new bootstrap.Toast(document.getElementById('passwordToast'));
+  const passwordToast = new bootstrap.Toast(
+    document.getElementById("passwordToast")
+  );
 
   // Fetch the admin password from the server
   let serverPassword = null;
 
   const fetchAdminPassword = () => {
-    return fetch('/admin-password')
+    return fetch("/admin-password")
       .then((response) => response.json())
       .then((data) => {
         serverPassword = data.password;
@@ -21,19 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Focus the username input when the modal is shown
-  const adminLoginModal = document.getElementById('adminLoginModal');
-  adminLoginModal.addEventListener('shown.bs.modal', () => {
+  const adminLoginModal = document.getElementById("adminLoginModal");
+  adminLoginModal.addEventListener("shown.bs.modal", () => {
     adminUsernameInput.focus();
   });
 
   // Handle admin login when "Login" button is clicked
-  accessAdminPanelButton.addEventListener("click", function() {
+  accessAdminPanelButton.addEventListener("click", function () {
     const username = adminUsernameInput.value;
     const password = adminPasswordInput.value;
 
     fetchAdminPassword().then(() => {
       if (serverPassword === null) {
-        console.error('Failed to load admin password.');
+        console.error("Failed to load admin password.");
         return;
       }
 
@@ -59,17 +63,19 @@ document.addEventListener("DOMContentLoaded", () => {
   adminPasswordInput.addEventListener("keydown", handleKeyDown);
 
   // Toggle password visibility
-  document.getElementById("togglePasswordVisibility").addEventListener("click", () => {
-    if (adminPasswordInput.type === "password") {
-      adminPasswordInput.type = "text";
-      passwordIcon.classList.remove("fa-eye");
-      passwordIcon.classList.add("fa-eye-slash");
-    } else {
-      adminPasswordInput.type = "password";
-      passwordIcon.classList.remove("fa-eye-slash");
-      passwordIcon.classList.add("fa-eye");
-    }
-  });
+  document
+    .getElementById("togglePasswordVisibility")
+    .addEventListener("click", () => {
+      if (adminPasswordInput.type === "password") {
+        adminPasswordInput.type = "text";
+        passwordIcon.classList.remove("fa-eye");
+        passwordIcon.classList.add("fa-eye-slash");
+      } else {
+        adminPasswordInput.type = "password";
+        passwordIcon.classList.remove("fa-eye-slash");
+        passwordIcon.classList.add("fa-eye");
+      }
+    });
 
   // Trigger search on Search button click
   searchButton.addEventListener("click", () => {
@@ -131,7 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>${file.title}</p>
                 <button type="button" class="btn btn-success"><a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a></button>
             `;
-      const categoryElement = document.getElementById(categories[file.category]);
+      const categoryElement = document.getElementById(
+        categories[file.category]
+      );
       if (categoryElement) {
         categoryElement.appendChild(fileElement);
       }

@@ -1,3 +1,6 @@
+::-webkit-scrollbar {
+  display: none;
+}
 /* General Styles */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -118,18 +121,9 @@ body {
   border-color: #007bff !important;
 }
 
-.filesList {
-  display: none; /* Initially hide all file lists */
-}
-.category {
-  margin-bottom: 1rem;
-}
-.search-container {
-  margin: 1rem 0;
-}
-
 /* Search Button Styles */
 .search-container {
+  margin: 1rem 0;
   display: flex;
   align-items: inherit;
   flex-wrap: nowrap; /* Ensure the input and button are in one line */
@@ -168,34 +162,35 @@ main {
 
 /* Center button with text by mavros */
 
-.content-allign{
-  /* MHN VALEIS DISPLAY DLEX EDW SE GAMHSA */
+.content-allign {
+  /* MHN VALEIS DISPLAY FLEX EDW SE GAMHSA */
   justify-content: center;
   align-items: center;
 }
 
-
 /* Files List Styles */
+.filesList {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+  padding: 0;
+}
+
 .filesList p {
   margin-top: 10px;
   font-size: 1.2em;
 }
 
 .filesList div {
-  background-color: #fff;
-  border: 3px solid #18960d83; /* Red border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-@keyframes animation {
-  
+  background-color: #fff !important;
+  border: 2px solid #054903c4 !important; /* green border */
+  border-radius: 50px !important; /* Rounded corners */
+  padding: 12px !important;
+  margin-bottom: 10px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  position: relative !important;
 }
 
 .filesList div::before {
@@ -205,11 +200,20 @@ main {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  border: 2px solid black; /* Black border on the outer edge */
+  border: 2px solid black;
   border-radius: 50px;
   z-index: -1;
 }
 
+/* Button icon transition */
+button i {
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Animate the icon rotation */
+.fa-minus {
+  transform: rotate(180deg);
+}
 /* Admin Panel Styles */
 form {
   background-color: #fff !important;
@@ -341,13 +345,13 @@ form button:hover {
     padding: 12px;
   }
 
-  #makaronia h1{
+  #makaronia h1 {
     display: none;
   }
 }
 
 @media (max-width: 480px) {
-  #makaronia h1{
+  #makaronia h1 {
     display: none;
   }
 
@@ -365,7 +369,6 @@ form button:hover {
     font-size: 14px;
   }
 }
-
 
 #admin-header {
   background-color: #343a40;
@@ -412,12 +415,10 @@ form button:hover {
   width: 100%;
 }
 
-
-
 /* Responsive Styles */
 @media (max-width: 768px) {
-  #uploadForm, #filesList {
-      margin: 0 10px;
+  #uploadForm,
+  #filesList {
+    margin: 0 10px;
   }
 }
-
