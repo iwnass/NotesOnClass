@@ -78,7 +78,7 @@ app.get("/files", (req, res) => {
   });
 });
 
-// Endpoint to delete a file by id
+// Endpoint to delete a file by id (updated to also delete from uploads folder)
 app.delete("/delete/:id", (req, res) => {
   const fileId = parseInt(req.params.id);
 
@@ -86,11 +86,27 @@ app.delete("/delete/:id", (req, res) => {
     if (err) throw err;
 
     let files = JSON.parse(data);
-    files = files.filter((file) => file.id !== fileId);
+    const fileToDelete = files.find((file) => file.id === fileId);
 
-    fs.writeFile("files.json", JSON.stringify(files, null, 2), (err) => {
-      if (err) throw err;
-      res.json({ success: true });
+    if (!fileToDelete) {
+      return res.status(404).json({ success: false, message: "File not found." });
+    }
+
+    const filePath = path.join(__dirname, `uploads/${path.basename(fileToDelete.url)}`);
+
+    // Delete the file from the uploads folder
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: "Error deleting file from uploads folder." });
+      }
+
+      // Remove the file's metadata from files.json
+      files = files.filter((file) => file.id !== fileId);
+
+      fs.writeFile("files.json", JSON.stringify(files, null, 2), (err) => {
+        if (err) throw err;
+        res.json({ success: true, message: "File deleted successfully." });
+      });
     });
   });
 });
