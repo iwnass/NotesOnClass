@@ -1,3 +1,5 @@
+// app.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const adminPanelButton = document.getElementById("adminPanelButton");
   const accessAdminPanelButton = document.getElementById(
@@ -8,19 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchBar = document.getElementById("searchBar");
   const searchButton = document.getElementById("searchButton");
 
-  // Toast element
+  // Toast element for incorrect password
   const passwordToast = new bootstrap.Toast(
     document.getElementById("passwordToast")
   );
 
-  // Fetch the admin password from the server
-  let serverPassword = null;
+  // Fetch the admin credentials from the server
+  let adminAccounts = [];
 
-  const fetchAdminPassword = () => {
-    return fetch("/admin-password")
+  const fetchAdminAccounts = () => {
+    return fetch("/admin-accounts")
       .then((response) => response.json())
       .then((data) => {
-        serverPassword = data.password;
+        adminAccounts = data.admins;
       });
   };
 
@@ -35,16 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const username = adminUsernameInput.value;
     const password = adminPasswordInput.value;
 
-    fetchAdminPassword().then(() => {
-      if (serverPassword === null) {
-        console.error("Failed to load admin password.");
+    fetchAdminAccounts().then(() => {
+      if (adminAccounts.length === 0) {
+        console.error("Failed to load admin accounts.");
         return;
       }
 
-      if (username === "admin" && password === serverPassword) {
-        window.location.href = "admin.html";
+      const matchingAccount = adminAccounts.find(
+        (account) => account.username === username && account.password === password
+      );
+
+      if (matchingAccount) {
+        window.location.href = "admin.html"; // Redirect to the admin page
       } else {
-        passwordToast.show();
+        passwordToast.show(); // Show incorrect login toast
         setTimeout(() => {
           passwordToast.hide();
         }, 1500);
@@ -127,19 +133,21 @@ document.addEventListener("DOMContentLoaded", () => {
       ΒάσειςΔεδομένων: "filesCategory7", // New Category
     };
 
+    // Clear all categories
     Object.values(categories).forEach((id) => {
       document.getElementById(id).innerHTML = "";
     });
 
+    // Populate categories with files
     files.forEach((file) => {
       const fileElement = document.createElement("div");
       fileElement.innerHTML = `
-                <p>${file.title}</p>
-                <button type="button" class="btn btn-success"><a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a></button>
-            `;
-      const categoryElement = document.getElementById(
-        categories[file.category]
-      );
+        <p>${file.title}</p>
+        <button type="button" class="btn btn-success">
+          <a href="${file.url}" target="_blank" style="text-decoration: none; color: white;">View</a>
+        </button>
+      `;
+      const categoryElement = document.getElementById(categories[file.category]);
       if (categoryElement) {
         categoryElement.appendChild(fileElement);
       }
