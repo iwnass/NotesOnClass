@@ -44,8 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         data.files.forEach((file) => {
           const fileElement = document.createElement("div");
           fileElement.innerHTML = `
-                        <p>${file.title} (${file.category})</p>
-                        <a href="${file.url}" target="_blank">View</a>
+                        <a href="${file.url}" target="_blank"><p>${file.title} (${file.category})</p></a>
                         <button data-id="${file.id}" class="deleteButton">Delete</button>
                     `;
           filesList.appendChild(fileElement);
